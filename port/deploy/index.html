@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inchara K S | Software Developer & Content Creator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        outfit: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        indigo: {
+                            50: '#f5f7ff',
+                            100: '#ebf0fe',
+                            200: '#ced9fd',
+                            300: '#a1b8fa',
+                            400: '#708df5',
+                            500: '#4f6bed',
+                            600: '#384edb',
+                            700: '#2d3eae',
+                            800: '#29358d',
+                            900: '#263172',
+                            950: '#171c43',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-main: #ffffff;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(226, 232, 240, 0.8);
+        }
+        html.dark {
+            --bg-main: #020617;
+            --glass-bg: rgba(15, 23, 42, 0.4);
+            --glass-border: rgba(30, 41, 59, 0.5);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-main);
+            overflow-x: hidden;
+        }
+
+        .bg-noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .bg-gradient-premium {
+            background: radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.08) 0%, transparent 50%);
+        }
+        html.dark .bg-gradient-premium {
+            background: radial-gradient(circle at 0% 0%, rgba(79, 70, 229, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 100% 100%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 50% 50%, rgba(15, 23, 42, 1) 0%, rgba(2, 6, 23, 1) 100%);
+        }
+
+        .glass-card {
+            backdrop-filter: blur(16px);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #4f46e5, #a855f7, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(1deg); }
+        }
+
+        .section-reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .section-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Cursor */
+        #custom-cursor {
+            width: 20px;
+            height: 20px;
+            background: rgba(79, 70, 229, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.1s ease;
+            backdrop-filter: blur(4px);
+            display: none;
+        }
+        @media (hover: hover) {
+            #custom-cursor { display: block; }
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        html.dark ::-webkit-scrollbar-thumb { background: #334155; }
+    </style>
+</head>
+<body class="bg-gradient-premium min-h-screen text-slate-900 dark:text-slate-50 transition-colors duration-500 selection:bg-indigo-500/30 selection:text-indigo-900 dark:selection:text-indigo-200">
+    <div id="custom-cursor"></div>
+    <div class="bg-noise"></div>
+
+    <!-- Navbar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-500 py-6">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="glass-card rounded-[2rem] px-8 py-4 flex justify-between items-center">
+                <a href="#home" class="text-2xl font-black text-slate-900 dark:text-white tracking-tighter">
+                    INCHARA<span class="text-indigo-600">.</span>
+                </a>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#about" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">About</a>
+                    <a href="#education" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">Education</a>
+                    <a href="#skills" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">Skills</a>
+                    <a href="#experience" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">Experience</a>
+                    <a href="#projects" class="text-slate-500 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-white transition-all text-[10px] font-black uppercase tracking-widest">Projects</a>
+                    <a href="#contact" class="px-6 py-2 rounded-full bg-indigo-600 text-white text-[10px] font-black uppercase tracking-widest hover:scale-105 transition-transform">Hire Me</a>
+                    <button id="theme-toggle" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                        <i data-lucide="moon" class="w-5 h-5 block dark:hidden"></i>
+                        <i data-lucide="sun" class="w-5 h-5 hidden dark:block"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="relative z-10">
+        <!-- Hero -->
+        <section id="home" class="min-h-screen flex items-center px-6 pt-20">
+            <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center gap-3 px-5 py-2 rounded-2xl bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl border border-slate-200 dark:border-slate-800 text-indigo-600 dark:text-indigo-400 font-bold text-xs uppercase tracking-widest mb-10 shadow-2xl shadow-indigo-500/10">
+                        <span class="relative flex h-3 w-3">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-indigo-500"></span>
+                        </span>
+                        Aspiring Software Developer
+                    </div>
+                    <h1 class="text-6xl md:text-9xl font-black text-slate-900 dark:text-white mb-10 tracking-tighter leading-[0.9]">
+                        <span class="text-gradient">Inchara K S</span>
+                    </h1>
+                    <p class="text-slate-600 dark:text-slate-400 text-2xl md:text-3xl font-light leading-tight mb-12 max-w-2xl">
+                        Passionate <span class="font-bold text-slate-900 dark:text-white">BCA Student</span> & <span class="text-indigo-600 font-bold">Aspiring Software Developer</span>
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                        <a href="#contact" class="px-10 py-5 rounded-[2rem] bg-indigo-600 text-white font-black shadow-2xl shadow-indigo-500/40 hover:scale-105 transition-all">Start a Conversation</a>
+                        <a href="public/resume.png" target="_blank" class="px-10 py-5 rounded-[2rem] glass-card font-black flex items-center justify-center gap-3 hover:scale-105 transition-all border-2 border-slate-100 dark:border-slate-800">
+                            <i data-lucide="file-text" class="text-indigo-600"></i> Curriculum Vitae
+                        </a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="absolute -inset-20 bg-indigo-500/20 rounded-full blur-[120px] animate-pulse"></div>
+                    <div class="relative z-10 w-80 h-80 md:w-[28rem] md:h-[28rem] rounded-[4rem] overflow-hidden border-[16px] border-white dark:border-slate-800/50 shadow-2xl animate-float">
+                        <img src="public/profile.jpg" onerror="this.src='https://ui-avatars.com/api/?name=Inchara+KS&background=4f46e5&color=fff&size=1024'" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section id="about" class="py-32 px-6 section-reveal">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6">About Me <span class="text-indigo-600">.</span></h2>
+                    <div class="w-20 h-1.5 bg-indigo-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="glass-card p-12 rounded-[3rem] text-center relative overflow-hidden group">
+                    <div class="absolute -top-10 -right-10 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl group-hover:scale-150 transition-transform duration-1000"></div>
+                    <p class="text-2xl font-light leading-relaxed text-slate-600 dark:text-slate-300">
+                        "To obtain a suitable position in a reputed organization where I can utilize my skills and knowledge to grow professionally and contribute to the company's success while making meaningful contributions."
+                    </p>
+                    <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-8 border-t border-slate-200 dark:border-slate-800 pt-12">
+                        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50">
+                            <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-2">Location</p>
+                            <p class="text-xl font-bold">Tumkur, Karnataka</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/50">
+                            <p class="text-[10px] font-black text-indigo-600 uppercase tracking-widest mb-2">Experience</p>
+                            <p class="text-xl font-bold">Internship & Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education -->
+        <section id="education" class="py-32 px-6 section-reveal">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6">Education <span class="text-indigo-600">.</span></h2>
+                    <div class="w-20 h-1.5 bg-indigo-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="space-y-12">
+                    <div class="glass-card p-10 rounded-[3rem] relative group hover:border-indigo-500/50 transition-all duration-500">
+                        <div class="flex flex-col md:flex-row justify-between gap-6">
+                            <div>
+                                <h3 class="text-3xl font-black mb-2">BCA Graduation</h3>
+                                <p class="text-indigo-600 font-bold text-lg mb-4">Vidya First Grade College, Chikkanahalli</p>
+                                <p class="text-slate-500">Focusing on modern software development and computer applications.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-indigo-600 text-white px-6 py-2 rounded-full font-black text-sm">2026</span>
+                                <p class="mt-4 text-3xl font-black text-indigo-600">8.5 CGPA</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-10 rounded-[3rem] relative group hover:border-purple-500/50 transition-all duration-500">
+                        <div class="flex flex-col md:flex-row justify-between gap-6">
+                            <div>
+                                <h3 class="text-3xl font-black mb-2">PUC – Science</h3>
+                                <p class="text-purple-600 font-bold text-lg mb-4">SKVD PU College, Chikkanahalli</p>
+                                <p class="text-slate-500">Advanced science and mathematics foundation.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-purple-600 text-white px-6 py-2 rounded-full font-black text-sm">2022</span>
+                                <p class="mt-4 text-3xl font-black text-purple-600">65%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-10 rounded-[3rem] relative group hover:border-emerald-500/50 transition-all duration-500">
+                        <div class="flex flex-col md:flex-row justify-between gap-6">
+                            <div>
+                                <h3 class="text-3xl font-black mb-2">SSLC (10th)</h3>
+                                <p class="text-emerald-600 font-bold text-lg mb-4">SKVD High School, Chikkanahalli</p>
+                                <p class="text-slate-500">Secondary school education with high academic achievement.</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="bg-emerald-600 text-white px-6 py-2 rounded-full font-black text-sm">2020</span>
+                                <p class="mt-4 text-3xl font-black text-emerald-600">89%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="py-32 px-6 section-reveal">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 text-gradient">Skills</h2>
+                    <p class="text-slate-500 max-w-xl mx-auto">A specialized toolkit of technical proficiencies and interpersonal abilities.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12">
+                    <div class="glass-card p-12 rounded-[3.5rem] relative overflow-hidden">
+                        <h3 class="text-3xl font-black mb-10 flex items-center gap-4">
+                            <i data-lucide="code" class="text-indigo-600"></i> Technical
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="p-6 rounded-2xl bg-white/50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 flex items-center gap-4 hover:scale-105 transition-transform">
+                                <span class="text-3xl">💻</span> <span class="font-bold">Visual Studio</span>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 flex items-center gap-4 hover:scale-105 transition-transform">
+                                <span class="text-3xl">🗄️</span> <span class="font-bold">SQL</span>
+                            </div>
+                            <div class="p-6 rounded-2xl bg-white/50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 flex items-center gap-4 hover:scale-105 transition-transform">
+                                <span class="text-3xl">🐍</span> <span class="font-bold">Python</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-12 rounded-[3.5rem]">
+                        <h3 class="text-3xl font-black mb-10 flex items-center gap-4">
+                            <i data-lucide="lightbulb" class="text-purple-600"></i> Interpersonal
+                        </h3>
+                        <div class="space-y-8">
+                            <div>
+                                <div class="flex justify-between mb-3"><span class="font-bold">Communication</span><span class="font-black text-indigo-600">90%</span></div>
+                                <div class="h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-600 w-[90%]"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-3"><span class="font-bold">Project Management</span><span class="font-black text-indigo-600">85%</span></div>
+                                <div class="h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-600 w-[85%]"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-3"><span class="font-bold">Time Management</span><span class="font-black text-indigo-600">95%</span></div>
+                                <div class="h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-indigo-500 to-purple-600 w-[95%]"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience -->
+        <section id="experience" class="py-32 px-6 section-reveal">
+            <div class="max-w-5xl mx-auto">
+                <div class="text-center mb-20">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6">Experience <span class="text-indigo-600">.</span></h2>
+                    <div class="w-20 h-1.5 bg-indigo-600 mx-auto rounded-full"></div>
+                </div>
+                <div class="space-y-10">
+                    <div class="glass-card p-12 rounded-[3rem] flex flex-col md:flex-row gap-10 hover:border-indigo-500/50 transition-all duration-500 group">
+                        <div class="w-20 h-20 shrink-0 rounded-3xl bg-indigo-600 flex items-center justify-center text-white shadow-xl rotate-3 group-hover:rotate-0 transition-all">
+                            <i data-lucide="briefcase" class="w-10 h-10"></i>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-3xl font-black">Internship</h3>
+                                <span class="bg-indigo-50 dark:bg-indigo-500/10 px-4 py-1.5 rounded-full text-indigo-600 font-black text-xs uppercase">1 Month</span>
+                            </div>
+                            <p class="text-xl font-bold text-slate-500 mb-6">Aikshetra Tech Solutions Pvt Ltd</p>
+                            <p class="text-lg text-slate-600 dark:text-slate-400">Gained practical experience and exposure to real-world software development processes.</p>
+                        </div>
+                    </div>
+                    <div class="glass-card p-12 rounded-[3rem] flex flex-col md:flex-row gap-10 hover:border-purple-500/50 transition-all duration-500 group">
+                        <div class="w-20 h-20 shrink-0 rounded-3xl bg-purple-600 flex items-center justify-center text-white shadow-xl rotate-3 group-hover:rotate-0 transition-all">
+                            <i data-lucide="activity" class="w-10 h-10"></i>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-3xl font-black">Project Work</h3>
+                                <span class="bg-purple-50 dark:bg-purple-500/10 px-4 py-1.5 rounded-full text-purple-600 font-black text-xs uppercase">Ongoing</span>
+                            </div>
+                            <p class="text-xl font-bold text-slate-500 mb-6">Online Courses & Automatic Projects</p>
+                            <p class="text-lg text-slate-600 dark:text-slate-400">Completed various online course projects and currently working on automatic projects to build practical skills.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Projects -->
+        <section id="projects" class="py-32 px-6 section-reveal">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-24">
+                    <h2 class="text-5xl md:text-8xl font-black tracking-tighter mb-8">Projects <span class="text-indigo-600">.</span></h2>
+                    <p class="text-xl font-light text-slate-500 max-w-2xl mx-auto">A curated collection of my digital experiments and academic achievements.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-12">
+                    <div class="group relative">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 shadow-2xl relative bg-slate-100 dark:bg-slate-900">
+                            <img src="https://images.unsplash.com/photo-1518433278981-d70238ad503d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-2">
+                            <div class="absolute inset-0 bg-indigo-600/80 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center p-10 text-center">
+                                <i data-lucide="github" class="text-white w-12 h-12 mb-6"></i>
+                                <h3 class="text-3xl font-black text-white mb-4">Automatic Project System</h3>
+                                <p class="text-white/80 text-sm">Python-based automation suite.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 shadow-2xl relative bg-slate-100 dark:bg-slate-900">
+                            <img src="https://images.unsplash.com/photo-1544383333-546e16bd3a5d?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-2">
+                            <div class="absolute inset-0 bg-purple-600/80 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center p-10 text-center">
+                                <i data-lucide="database" class="text-white w-12 h-12 mb-6"></i>
+                                <h3 class="text-3xl font-black text-white mb-4">DBMS Optimization</h3>
+                                <p class="text-white/80 text-sm">Relational query engine.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="group relative">
+                        <div class="aspect-[4/5] rounded-[3rem] overflow-hidden mb-8 shadow-2xl relative bg-slate-100 dark:bg-slate-900">
+                            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110 group-hover:rotate-2">
+                            <div class="absolute inset-0 bg-pink-600/80 opacity-0 group-hover:opacity-100 transition-all flex flex-col items-center justify-center p-10 text-center">
+                                <i data-lucide="globe" class="text-white w-12 h-12 mb-6"></i>
+                                <h3 class="text-3xl font-black text-white mb-4">Content Creation Hub</h3>
+                                <p class="text-white/80 text-sm">Digital showcase platform.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="py-32 px-6 section-reveal">
+            <div class="max-w-6xl mx-auto glass-card p-16 rounded-[4rem] grid lg:grid-cols-2 gap-20">
+                <div>
+                    <div class="inline-flex p-4 bg-indigo-600/10 rounded-3xl text-indigo-600 mb-8"><i data-lucide="send" class="w-10 h-10"></i></div>
+                    <h2 class="text-6xl font-black mb-8 leading-tight">Get in <br/><span class="text-indigo-600">touch</span>.</h2>
+                    <p class="text-xl text-slate-500 mb-12">I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!</p>
+                    <div class="space-y-8">
+                        <a href="mailto:incharabhoomika@gmail.com" class="flex items-center gap-6 group">
+                            <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-900 flex items-center justify-center group-hover:bg-indigo-600 group-hover:text-white transition-all"><i data-lucide="mail"></i></div>
+                            <span class="text-xl font-bold group-hover:text-indigo-600 transition-colors">incharabhoomika@gmail.com</span>
+                        </a>
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14 rounded-2xl bg-slate-100 dark:bg-slate-900 flex items-center justify-center"><i data-lucide="map-pin"></i></div>
+                            <span class="text-xl font-bold">Tumkur, Karnataka</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="space-y-6" onsubmit="event.preventDefault()">
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Name</label>
+                            <input type="text" placeholder="John Doe" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-[1.5rem] px-8 py-5 focus:ring-2 ring-indigo-600 outline-none transition-all shadow-inner">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Email</label>
+                            <input type="email" placeholder="john@example.com" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-[1.5rem] px-8 py-5 focus:ring-2 ring-indigo-600 outline-none transition-all shadow-inner">
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-4">Message</label>
+                        <textarea placeholder="Your message here..." rows="6" class="w-full bg-slate-50 dark:bg-slate-900/50 border-none rounded-[2rem] px-8 py-6 focus:ring-2 ring-indigo-600 outline-none transition-all shadow-inner resize-none"></textarea>
+                    </div>
+                    <button class="w-full bg-indigo-600 text-white font-black py-6 rounded-[2rem] shadow-2xl shadow-indigo-600/30 hover:scale-[1.02] active:scale-[0.98] transition-all text-lg">Send Message</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-16 border-t border-slate-200 dark:border-slate-800 text-center px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <a href="#home" class="text-2xl font-black tracking-tighter">INCHARA<span class="text-indigo-600">.</span></a>
+            <p class="text-slate-500 font-bold uppercase tracking-[0.4em] text-[10px]">© 2026 • Designed with Passion for Excellence</p>
+            <div class="flex gap-6">
+                <a href="#" class="text-slate-400 hover:text-indigo-600 transition-colors"><i data-lucide="github"></i></a>
+                <a href="#" class="text-slate-400 hover:text-indigo-600 transition-colors"><i data-lucide="linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        // Theme Toggle
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            localStorage.theme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        });
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        }
+
+        // Custom Cursor
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'scale(1)');
+
+        const interactiveElements = document.querySelectorAll('a, button, input, textarea');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.style.transform = 'scale(3)';
+                cursor.style.background = 'rgba(79, 70, 229, 0.2)';
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.style.transform = 'scale(1)';
+                cursor.style.background = 'rgba(79, 70, 229, 0.5)';
+            });
+        });
+
+        // Intersection Observer for reveals
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-reveal').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('py-4'); nav.classList.remove('py-6');
+            } else {
+                nav.classList.add('py-6'); nav.classList.remove('py-4');
+            }
+        });
+    </script>
+</body>
+</html>
