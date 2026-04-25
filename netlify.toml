@@ -1,7 +1,7 @@
 [build]
   base = "port"
   command = "npm run build"
-  publish = "port/dist"
+  publish = "dist"
 
 [[redirects]]
   from = "/*"
